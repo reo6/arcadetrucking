@@ -1,0 +1,80 @@
+[gd_scene load_steps=8 format=3 uid="uid://d4ljkc7l57udr"]
+
+[ext_resource type="PackedScene" uid="uid://dtncvl5af4fhr" path="res://objects/road.glb" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://cs0y5pe8qnj2r" path="res://scripts/player.gd" id="2_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://cewenjpq8wbig" path="res://objects/testcar.glb" id="2_yqjtg"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lnu2h"]
+sky_top_color = Color(0, 0.388235, 1, 1)
+sky_horizon_color = Color(0.485671, 0.57498, 0.718921, 1)
+ground_horizon_color = Color(0.485671, 0.57498, 0.718921, 1)
+
+[sub_resource type="Sky" id="Sky_lbhrr"]
+sky_material = SubResource("ProceduralSkyMaterial_lnu2h")
+
+[sub_resource type="Environment" id="Environment_iywne"]
+background_mode = 2
+sky = SubResource("Sky_lbhrr")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yqjtg"]
+size = Vector3(3.60051, 2.21851, 1.87103)
+
+[node name="Game" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iywne")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="RoadBlocks" type="Node3D" parent="."]
+
+[node name="Road" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10.549, 9.53674e-07, 0.0019331)
+
+[node name="Road2" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 9.5, 0, 0)
+
+[node name="Road3" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -50.613, 9.53674e-07, 0.0019331)
+
+[node name="Road4" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -30.564, 0, 0)
+
+[node name="Road5" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -89.5907, 9.53674e-07, 0.0019331)
+
+[node name="Road6" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -69.5417, 0, 0)
+
+[node name="Road7" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -129.655, 9.53674e-07, 0.0019331)
+
+[node name="Road8" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -109.606, 0, 0)
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.449395)
+script = ExtResource("2_lnu2h")
+
+[node name="TestCar" parent="Player" instance=ExtResource("2_yqjtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.53674e-07, -0.463639)
+
+[node name="FrontLeftWheel" type="Node3D" parent="Player/TestCar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.3, 1.2)
+
+[node name="FrontRightWheel" type="Node3D" parent="Player/TestCar"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.3, 1.2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.279745, 1.10964, -0.462006)
+shape = SubResource("BoxShape3D_yqjtg")
+
+[node name="Head" type="Node3D" parent="Player"]
+transform = Transform3D(0.965536, 0.260269, 0, -0.260269, 0.965536, 0, 0, 0, 1, 0, 1.54334, -0.215674)
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head"]
+transform = Transform3D(-4.25071e-08, -0.233123, 0.972448, -1.01901e-08, 0.972448, 0.233123, -1, 5.4623e-14, -4.37115e-08, -0.136201, -0.0638226, 0.247312)
