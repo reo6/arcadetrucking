@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl4v7fq6p7evj"]
+
+[ext_resource type="PackedScene" uid="uid://dtncvl5af4fhr" path="res://objects/road.glb" id="1_mv8x7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1s9f8"]
+size = Vector3(20, 10, 20)
+
+[node name="Road" type="Node3D"]
+
+[node name="RoadObject" parent="." instance=ExtResource("1_mv8x7")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="DespawnArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DespawnArea"]
+shape = SubResource("BoxShape3D_1s9f8")

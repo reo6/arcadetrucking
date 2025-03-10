@@ -8,6 +8,9 @@ extends CharacterBody3D
 
 var current_speed: float = 0.0
 
+func _ready():
+	add_to_group("player")
+
 func _physics_process(delta: float) -> void:
 	# Apply gravity
 	if not is_on_floor():

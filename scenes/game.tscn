@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://d4ljkc7l57udr"]
+[gd_scene load_steps=9 format=3 uid="uid://d4ljkc7l57udr"]
 
+[ext_resource type="PackedScene" uid="uid://r1q4xvfbrc7l" path="res://scenes/roadmanager.tscn" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://dtncvl5af4fhr" path="res://objects/road.glb" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://cs0y5pe8qnj2r" path="res://scripts/player.gd" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://cewenjpq8wbig" path="res://objects/testcar.glb" id="2_yqjtg"]
@@ -22,6 +23,10 @@ glow_enabled = true
 size = Vector3(3.60051, 2.21851, 1.87103)
 
 [node name="Game" type="Node3D"]
+
+[node name="Node3D" parent="." instance=ExtResource("1_lbhrr")]
+
+[node name="RoadManager" parent="." instance=ExtResource("1_lbhrr")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_iywne")
