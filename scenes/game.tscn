@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://d4ljkc7l57udr"]
+[gd_scene load_steps=9 format=3 uid="uid://d4ljkc7l57udr"]
 
 [ext_resource type="PackedScene" uid="uid://dtncvl5af4fhr" path="res://objects/road.glb" id="1_uwrxv"]
-[ext_resource type="Script" uid="uid://cs0y5pe8qnj2r" path="res://scripts/player.gd" id="2_lnu2h"]
+[ext_resource type="Script" uid="uid://63j50wn1myoi" path="res://scripts/vehicle.gd" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://cewenjpq8wbig" path="res://objects/testcar.glb" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://btpfvhpv0630f" path="res://scenes/wheel.tscn" id="4_lbhrr"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lnu2h"]
 sky_top_color = Color(0, 0.388235, 1, 1)
@@ -18,8 +19,8 @@ sky = SubResource("Sky_lbhrr")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_yqjtg"]
-size = Vector3(3.60051, 2.21851, 1.87103)
+[sub_resource type="BoxShape3D" id="BoxShape3D_lbhrr"]
+size = Vector3(3.6333, 0.937874, 1.93555)
 
 [node name="Game" type="Node3D"]
 
@@ -56,25 +57,33 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -129.655, 9.53674e-07, 0.0019
 [node name="Road8" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -109.606, 0, 0)
 
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.449395)
+[node name="PlayerVehicle" type="VehicleBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.519431)
 script = ExtResource("2_lnu2h")
 
-[node name="TestCar" parent="Player" instance=ExtResource("2_yqjtg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.53674e-07, -0.463639)
+[node name="TestCar" parent="PlayerVehicle" instance=ExtResource("2_yqjtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.464)
 
-[node name="FrontLeftWheel" type="Node3D" parent="Player/TestCar"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.3, 1.2)
+[node name="RearLeftWheel" parent="PlayerVehicle" instance=ExtResource("4_lbhrr")]
+transform = Transform3D(-2.62268e-08, 0, -0.6, 0, 0.6, 0, 0.6, 0, -2.62268e-08, 0.943448, 0.301217, 0.324063)
+use_as_traction = true
 
-[node name="FrontRightWheel" type="Node3D" parent="Player/TestCar"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.3, 1.2)
+[node name="FrontLeftWheel" parent="PlayerVehicle" instance=ExtResource("4_lbhrr")]
+transform = Transform3D(-2.62268e-08, 0, -0.6, 0, 0.6, 0, 0.6, 0, -2.62268e-08, -1.49207, 0.301217, 0.324063)
+use_as_steering = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.279745, 1.10964, -0.462006)
-shape = SubResource("BoxShape3D_yqjtg")
+[node name="RearRightWheel" parent="PlayerVehicle" instance=ExtResource("4_lbhrr")]
+transform = Transform3D(-2.62268e-08, 0, -0.6, 0, 0.6, 0, 0.6, 0, -2.62268e-08, 0.943448, 0.301217, -1.24299)
+use_as_traction = true
 
-[node name="Head" type="Node3D" parent="Player"]
-transform = Transform3D(0.965536, 0.260269, 0, -0.260269, 0.965536, 0, 0, 0, 1, 0, 1.54334, -0.215674)
+[node name="FrontRightWheel" parent="PlayerVehicle" instance=ExtResource("4_lbhrr")]
+transform = Transform3D(-2.62268e-08, 0, -0.6, 0, 0.6, 0, 0.6, 0, -2.62268e-08, -1.49207, 0.301217, -1.24299)
+use_as_steering = true
 
-[node name="Camera3D" type="Camera3D" parent="Player/Head"]
-transform = Transform3D(-4.25071e-08, -0.233123, 0.972448, -1.01901e-08, 0.972448, 0.233123, -1, 5.4623e-14, -4.37115e-08, -0.136201, -0.0638226, 0.247312)
+[node name="Camera3D" type="Camera3D" parent="PlayerVehicle"]
+transform = Transform3D(-3.92527e-08, -0.440002, 0.897997, -1.92331e-08, 0.897997, 0.440002, -1, 8.73235e-16, -4.37114e-08, 3.93353, 3.74796, -0.402741)
+fov = 71.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerVehicle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.283447, 0.713863, -0.467773)
+shape = SubResource("BoxShape3D_lbhrr")
