@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://d4ljkc7l57udr"]
+[gd_scene load_steps=9 format=3 uid="uid://d4ljkc7l57udr"]
 
-[ext_resource type="PackedScene" uid="uid://dtncvl5af4fhr" path="res://objects/road.glb" id="1_uwrxv"]
+[ext_resource type="Script" uid="uid://hufd4xlq7b6k" path="res://scripts/road_manager.gd" id="1_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://mu3b314l3soy" path="res://scenes/road.tscn" id="1_lnu2h"]
 [ext_resource type="Script" uid="uid://cs0y5pe8qnj2r" path="res://scripts/player.gd" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://cewenjpq8wbig" path="res://objects/testcar.glb" id="2_yqjtg"]
 
@@ -30,44 +31,18 @@ environment = SubResource("Environment_iywne")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="RoadBlocks" type="Node3D" parent="."]
+[node name="RoadManager" type="Node3D" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("1_lbhrr")
+player = NodePath("../Player")
 
-[node name="Road" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -10.549, 9.53674e-07, 0.0019331)
-
-[node name="Road2" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 9.5, 0, 0)
-
-[node name="Road3" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -50.613, 9.53674e-07, 0.0019331)
-
-[node name="Road4" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -30.564, 0, 0)
-
-[node name="Road5" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -89.5907, 9.53674e-07, 0.0019331)
-
-[node name="Road6" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -69.5417, 0, 0)
-
-[node name="Road7" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -129.655, 9.53674e-07, 0.0019331)
-
-[node name="Road8" parent="RoadBlocks" instance=ExtResource("1_uwrxv")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -109.606, 0, 0)
+[node name="Road" parent="RoadManager" instance=ExtResource("1_lnu2h")]
 
 [node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.449395)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 script = ExtResource("2_lnu2h")
 
 [node name="TestCar" parent="Player" instance=ExtResource("2_yqjtg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.53674e-07, -0.463639)
-
-[node name="FrontLeftWheel" type="Node3D" parent="Player/TestCar"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0.3, 1.2)
-
-[node name="FrontRightWheel" type="Node3D" parent="Player/TestCar"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.3, 1.2)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.279745, 1.10964, -0.462006)

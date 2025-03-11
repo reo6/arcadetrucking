@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://mu3b314l3soy"]
+
+[ext_resource type="PackedScene" uid="uid://dtncvl5af4fhr" path="res://objects/road.glb" id="1_mv8x7"]
+
+[node name="Road" type="Node3D"]
+
+[node name="RoadObject" parent="." instance=ExtResource("1_mv8x7")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
