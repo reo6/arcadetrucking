@@ -24,32 +24,45 @@ size = Vector3(3.60051, 2.21851, 1.87103)
 
 [node name="Game" type="Node3D"]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 4
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+size = Vector2i(320, 240)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
 environment = SubResource("Environment_iywne")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="RoadManager" type="Node3D" parent="." node_paths=PackedStringArray("player")]
-script = ExtResource("1_lbhrr")
-player = NodePath("../Player")
-
-[node name="Road" parent="RoadManager" instance=ExtResource("1_lnu2h")]
-
-[node name="Player" type="CharacterBody3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+[node name="Player" type="CharacterBody3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.510139, 0, -0.578158)
 script = ExtResource("2_lnu2h")
 
-[node name="TestCar" parent="Player" instance=ExtResource("2_yqjtg")]
+[node name="TestCar" parent="SubViewportContainer/SubViewport/Player" instance=ExtResource("2_yqjtg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.53674e-07, -0.463639)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.279745, 1.10964, -0.462006)
 shape = SubResource("BoxShape3D_yqjtg")
 
-[node name="Head" type="Node3D" parent="Player"]
+[node name="Head" type="Node3D" parent="SubViewportContainer/SubViewport/Player"]
 transform = Transform3D(0.965536, 0.260269, 0, -0.260269, 0.965536, 0, 0, 0, 1, 0, 1.54334, -0.215674)
 
-[node name="Camera3D" type="Camera3D" parent="Player/Head"]
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Player/Head"]
 transform = Transform3D(-4.25071e-08, -0.233123, 0.972447, -1.01901e-08, 0.972447, 0.233123, -1, 4.14113e-14, -4.37115e-08, -0.181639, 0.104743, 0.247312)
+
+[node name="RoadManager" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("player")]
+script = ExtResource("1_lbhrr")
+player = NodePath("../Player")
+
+[node name="Road" parent="SubViewportContainer/SubViewport/RoadManager" instance=ExtResource("1_lnu2h")]
