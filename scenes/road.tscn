@@ -1,8 +1,56 @@
-[gd_scene load_steps=2 format=3 uid="uid://mu3b314l3soy"]
+[gd_scene load_steps=3 format=3 uid="uid://mu3b314l3soy"]
 
 [ext_resource type="PackedScene" uid="uid://dtncvl5af4fhr" path="res://objects/road.glb" id="1_mv8x7"]
+[ext_resource type="Texture2D" uid="uid://d5joix6cbuik" path="res://sprites/palm-tree.png" id="2_my2y2"]
 
 [node name="Road" type="Node3D"]
 
 [node name="RoadObject" parent="." instance=ExtResource("1_mv8x7")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="Trees" type="Node3D" parent="."]
+
+[node name="PalmTree" type="Sprite3D" parent="Trees"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 2.93877, 2.34261, -9.49557)
+flip_h = true
+billboard = 1
+texture = ExtResource("2_my2y2")
+
+[node name="PalmTree5" type="Sprite3D" parent="Trees"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -2.83949, 2.34261, -14.0975)
+billboard = 1
+texture = ExtResource("2_my2y2")
+
+[node name="PalmTree6" type="Sprite3D" parent="Trees"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 1.1861, 2.34261, -20.8587)
+flip_h = true
+billboard = 1
+texture = ExtResource("2_my2y2")
+
+[node name="PalmTree7" type="Sprite3D" parent="Trees"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 5.2136, 2.34261, -16.6129)
+billboard = 1
+texture = ExtResource("2_my2y2")
+
+[node name="PalmTree2" type="Sprite3D" parent="Trees"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 2.34261, 9.30729)
+flip_h = true
+billboard = 1
+texture = ExtResource("2_my2y2")
+
+[node name="PalmTree8" type="Sprite3D" parent="Trees"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 5.74419, 2.34261, 13.1949)
+billboard = 1
+texture = ExtResource("2_my2y2")
+
+[node name="PalmTree3" type="Sprite3D" parent="Trees"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -3.32652, 2.34261, 13.0005)
+flip_h = true
+billboard = 1
+texture = ExtResource("2_my2y2")
+
+[node name="PalmTree4" type="Sprite3D" parent="Trees"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 2.34261, 17.0532)
+flip_h = true
+billboard = 1
+texture = ExtResource("2_my2y2")
