@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://d4ljkc7l57udr"]
+[gd_scene load_steps=10 format=3 uid="uid://d4ljkc7l57udr"]
 
 [ext_resource type="Script" uid="uid://hufd4xlq7b6k" path="res://scripts/road_manager.gd" id="1_lbhrr"]
 [ext_resource type="PackedScene" uid="uid://mu3b314l3soy" path="res://scenes/road.tscn" id="1_lnu2h"]
 [ext_resource type="Script" uid="uid://cs0y5pe8qnj2r" path="res://scripts/player.gd" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://cewenjpq8wbig" path="res://objects/testcar.glb" id="2_yqjtg"]
+[ext_resource type="Texture2D" uid="uid://4kfwwijnbqlw" path="res://sprites/interior_overlays/truck-interior.png" id="5_iywne"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lnu2h"]
 sky_top_color = Color(0, 0.388235, 1, 1)
@@ -35,7 +36,9 @@ stretch = true
 stretch_shrink = 4
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
 size = Vector2i(320, 240)
+render_target_update_mode = 4
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport"]
 environment = SubResource("Environment_iywne")
@@ -50,6 +53,7 @@ script = ExtResource("2_lnu2h")
 
 [node name="TestCar" parent="SubViewportContainer/SubViewport/Player" instance=ExtResource("2_yqjtg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.53674e-07, -0.463639)
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.279745, 1.10964, -0.462006)
@@ -59,10 +63,16 @@ shape = SubResource("BoxShape3D_yqjtg")
 transform = Transform3D(0.965536, 0.260269, 0, -0.260269, 0.965536, 0, 0, 0, 1, 0, 1.54334, -0.215674)
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/Player/Head"]
-transform = Transform3D(-4.25071e-08, -0.233123, 0.972447, -1.01901e-08, 0.972447, 0.233123, -1, 4.14113e-14, -4.37115e-08, -0.181639, 0.104743, 0.247312)
+transform = Transform3D(-2.19056e-08, -0.570069, 0.821597, -5.39943e-08, 0.821597, 0.570069, -1, -3.18738e-08, -4.8778e-08, -0.181639, 0.104743, 0.247312)
 
 [node name="RoadManager" type="Node3D" parent="SubViewportContainer/SubViewport" node_paths=PackedStringArray("player")]
 script = ExtResource("1_lbhrr")
 player = NodePath("../Player")
 
 [node name="Road" parent="SubViewportContainer/SubViewport/RoadManager" instance=ExtResource("1_lnu2h")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubViewportContainer/SubViewport"]
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport/CanvasLayer"]
+position = Vector2(160, 120)
+texture = ExtResource("5_iywne")
